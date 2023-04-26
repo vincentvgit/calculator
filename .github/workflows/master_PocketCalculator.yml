@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://registrevincentvgit.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_be443320bacd4a27a4f87855ce364807 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_195592e412634ae08254f69072a6272d }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_ae1c406a94164b02938dc69e42317107 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_de7cdaf442ef442998407088ee8436da }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: registrevincentvgit.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_be443320bacd4a27a4f87855ce364807 }}/registrevincentvgit/calculator:${{ github.sha }}
+        tags: registrevincentvgit.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_ae1c406a94164b02938dc69e42317107 }}/registrevincentvgit/registrevincentvgit/calculator:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'PocketCalculator'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_c199fc074fff4bf78287f5a2f306c2ec }}
-        images: 'registrevincentvgit.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_be443320bacd4a27a4f87855ce364807 }}/registrevincentvgit/calculator:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_4e5dab06ff5b4dc6849fd626ea0b4ba7 }}
+        images: 'registrevincentvgit.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_ae1c406a94164b02938dc69e42317107 }}/registrevincentvgit/registrevincentvgit/calculator:${{ github.sha }}'
