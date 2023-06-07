@@ -16,7 +16,7 @@ pipeline {
             steps {
                 
                 script {
-                    def dockerImage = docker.build('calculator3')
+                    def dockerImage = docker.build('calculator01')
                     dockerImage.push()
                 }
             }
@@ -24,7 +24,7 @@ pipeline {
         stage ('Docker Tag') {
             steps {
                 script {
-                    sh 'sudo docker tag calculator3 vincentvdocker/calculator3'
+                    sh 'sudo docker tag calculator01 vincentvdocker/calculator01'
                     
                 }
             }
@@ -32,7 +32,7 @@ pipeline {
          stage('Login') {
       steps {
         script{
-            sh 'sudo docker Login -u vincentvdocker -p Nufan151*'
+            sh 'sudo docker login -u vincentvdocker -p Nufan151*+'
         }}
       }
         
@@ -41,7 +41,7 @@ pipeline {
                 
                 script {
                      
-                        sh 'sudo docker push vincentvdocker/calculator3'
+                        sh 'docker push vincentvdocker/calculator01'
                     }
                 }
             }
