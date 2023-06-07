@@ -46,4 +46,12 @@ pipeline {
             }
         }
     }
-sshPublisher(publishers: [sshPublisherDesc(configName: 'vincent-docker', sshCredentials: [encryptedPassphrase: '{AQAAABAAAAAQxRxUgFgSm7zsYshq8ajpgrQN1FHdmgsQBJxPsM4cg64=}', key: '', keyPath: '', username: 'vincent'], transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker run -d -p 8182:3000 vincentvdocker/calculator01', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+node {
+  def remote = [:]
+  remote.name = 'vincent-docker'
+  remote.host = '51.103.94.88'
+  remote.user = 'vincent'
+  remote.password = 'Azertyuiop123'
+  remote.allowAnyHosts = true
+  stage('Remote SSH') {
+    sshCommand remote: remote, command: "docker run -d -p 8182:3000"
