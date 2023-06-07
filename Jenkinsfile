@@ -6,8 +6,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Récupérer le code source du projet depuis un référentiel git
-                // (vous pouvez modifier cette étape en fonction de votre configuration)
+             
                 git 'https://github.com/vincentvgit/calculator.git'
             }
         }
@@ -17,14 +16,14 @@ pipeline {
                 
                 script {
                     def dockerImage = docker.build('calculator01')
-                    dockerImage.push()
+                    
                 }
             }
         }
         stage ('Docker Tag') {
             steps {
                 script {
-                    sh 'sudo docker tag calculator01 vincentvdocker/calculator01'
+                    sh 'docker tag calculator01 vincentvdocker/calculator01'
                     
                 }
             }
@@ -32,7 +31,7 @@ pipeline {
          stage('Login') {
       steps {
         script{
-            sh 'sudo docker login -u vincentvdocker -p Nufan151*+'
+            sh 'docker login -u vincentvdocker -p dckr_pat_WLTjxmlF105W-k2SLxSQhvVAUCI'
         }}
       }
         
