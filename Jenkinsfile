@@ -54,6 +54,6 @@ pipeline {
             remote.password = 'Azertyuiop123'
             remote.allowAnyHosts = true
             stage('Remote SSH') {
-                sshCommand remote: remote, command: "docker run -d -p 8182:3000"
+                sshCommand remote: remote, command: "docker run -d -p 8182:3000 vincentvdocker/calculator01"
             }
           }
