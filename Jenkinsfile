@@ -46,12 +46,14 @@ pipeline {
             }
         }
     }
-node {
-  def remote = [:]
-  remote.name = 'vincent-docker'
-  remote.host = '51.103.94.88'
-  remote.user = 'vincent'
-  remote.password = 'Azertyuiop123'
-  remote.allowAnyHosts = true
-  stage('Remote SSH') {
-    sshCommand remote: remote, command: "docker run -d -p 8182:3000"
+          node {
+            def remote = [:]
+            remote.name = 'vincent-docker'
+            remote.host = '51.103.94.88'
+            remote.user = 'vincent'
+            remote.password = 'Azertyuiop123'
+            remote.allowAnyHosts = true
+            stage('Remote SSH') {
+                sshCommand remote: remote, command: "docker run -d -p 8182:3000"
+            }
+          }
