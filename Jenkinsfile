@@ -1,43 +1,49 @@
 pipeline {
     agent any
+    
+  
 
- 
     stages {
-       
-        stage ('Docker Build') {
+        stage('Checkout') {
             steps {
+                // Récupérer le code source du projet depuis un référentiel git
+                // (vous pouvez modifier cette étape en fonction de votre configuration)
+                git 'https://github.com/vincentvgit/calculator.git'
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                
                 script {
-                    sh 'docker build -t calculator01 .'
-                    echo 'Build Image Completed'
+                    def dockerImage = docker.build('calculator3')
+                    dockerImage.push()
                 }
             }
         }
-
         stage ('Docker Tag') {
             steps {
                 script {
-                    sh 'docker tag calculator01 vincentvdocker/calculator01'
-                    echo 'Tag Image Completed'
+                    sh 'sudo docker tag calculator3 vincentvdocker/calculator3'
+                    
                 }
             }
         }
-
-        stage('Docker Login') {
+         stage('Login') {
+      steps {
+        script{
+            sh 'sudo docker Login -u vincentvdocker -p Nufan151*'
+        }}
+      }
+        
+        stage('Push to Docker Hub') {
             steps {
+                
                 script {
-                    sh 'docker login -u vincentvdocker -p Nufan151*+' 
-                    echo 'Login Completed'
-                }
-            }
-        }
-
-        stage ('Docker Push') {
-            steps {
-                script {
-                    sh 'docker push vincentvdocker/calculator01'
-                    echo 'Push Completed'
+                     
+                        sh 'sudo docker push vincentvdocker/calculator3'
+                    }
                 }
             }
         }
     }
-}
