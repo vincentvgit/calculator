@@ -47,4 +47,4 @@ pipeline {
         }
     }
 
-sshPublisher(publishers: [sshPublisherDesc(configName: 'vincent-docker', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'docker run -d -p 8181:3000 vincentvdocker/calculator01', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+sshPublisher(publishers: [sshPublisherDesc(configName: 'vincent-docker', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'sudo docker run -d -p 8181:3000 vincentvdocker/calculator01', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
