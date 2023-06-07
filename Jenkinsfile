@@ -3,14 +3,7 @@ pipeline {
 
  
     stages {
-        
-        stage("Maven clean build") {
-             steps { 
-                  def mavenHome = tool name:"Maven-3.8.6", type: "maven"
-                  def mavenCMD = "${mavenHome}/bin/mvn"
-                  sh "${mavenCMD} clean package"
-   }
-}
+       
         stage ('Docker Build') {
             steps {
                 script {
