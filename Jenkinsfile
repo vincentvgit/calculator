@@ -1,16 +1,41 @@
 pipeline {
-    docker.image('calculator/new').withRun('-p 8181:80') { c ->
+    agent any
 
-        sh 'docker ps'
+    stages {
+        stage ('Docker Build') {
+            steps {
+                script {
+                    sh 'docker build -t calculator01 .'
+                    echo 'Build Image Completed'
+                }
+            }
+        }
 
-        sh 'curl localhost'
-      stages {
-        stage('log version info') {
-      steps {
-        sh 'mvn --version'
-        sh 'mvn clean install'
-      }
+        stage ('Docker Tag') {
+            steps {
+                script {
+                    sh 'docker tag calculator01 vincentvdocker/calculator01'
+                    echo 'Tag Image Completed'
+                }
+            }
+        }
+
+        stage('Docker Login') {
+            steps {
+                script {
+                    sh 'docker login -u vincentvdocker -p Nufan151*+' 
+                    echo 'Login Completed'
+                }
+            }
+        }
+
+        stage ('Docker Push') {
+            steps {
+                script {
+                    sh 'docker push vincentvdocker/calculator01'
+                    echo 'Push Completed'
+                }
+            }
+        }
     }
-  }
- }       
 }
