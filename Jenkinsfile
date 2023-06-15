@@ -15,7 +15,7 @@ pipeline {
             steps {
                 
                 script {
-                    def dockerImage = docker.build('calculator01')
+                    def dockerImage = docker.build('calculator02')
                     
                 }
             }
@@ -23,7 +23,7 @@ pipeline {
         stage ('Docker Tag') {
             steps {
                 script {
-                    sh 'docker tag calculator01 vincentvdocker/calculator01'
+                    sh 'docker tag calculator01 vincentvdocker/calculator02'
                     
                 }
             }
@@ -40,20 +40,20 @@ pipeline {
                 
                 script {
                      
-                        sh 'docker push vincentvdocker/calculator01'
+                        sh 'docker push vincentvdocker/calculator02'
                     }
                 }
             }
         }
     }
-          node {
-            def remote = [:]
-            remote.name = 'vincent-docker'
-            remote.host = '51.103.94.88'
-            remote.user = 'vincent'
-            remote.password = 'Azertyuiop123'
-            remote.allowAnyHosts = true
-            stage('Remote SSH') {
-                sshCommand remote: remote, command: "docker run -d -p 8182:3000 vincentvdocker/calculator01"
-            }
+          #node {
+            #def remote = [:]
+            #remote.name = 'vincent-docker'
+            #remote.host = '51.103.94.88'
+            #remote.user = 'vincent'
+            #remote.password = 'Azertyuiop123'
+            #remote.allowAnyHosts = true
+           # stage('Remote SSH') {
+          #      sshCommand remote: remote, command: "docker run -d -p 8182:3000 vincentvdocker/calculator01"
+         #   }
           }
