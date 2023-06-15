@@ -23,7 +23,7 @@ pipeline {
         stage ('Docker Tag') {
             steps {
                 script {
-                    sh 'docker tag calculator01 vincentvdocker/calculator02'
+                    sh 'docker tag calculator02 vincentvdocker/calculator02'
                     
                 }
             }
